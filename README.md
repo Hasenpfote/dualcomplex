@@ -26,6 +26,14 @@ Supports C++ 11 or higher.
 
 
 
+## Dependencies
+
+- [Eigen](http://eigen.tuxfamily.org)
+
+  Limited use in  [dualcomplex_conversion.h](https://github.com/Hasenpfote/dualcomplex/blob/master/include/dualcomplex/dualcomplex_conversion.h)
+
+
+
 ## usage
 
 ```c++
