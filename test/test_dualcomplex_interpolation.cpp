@@ -37,6 +37,99 @@ DualComplexInterpolationTest<T>::PI = std::acos(-T(1));
 using MyTypes = ::testing::Types<float, double>;
 TYPED_TEST_SUITE(DualComplexInterpolationTest, MyTypes);
 
+TYPED_TEST(DualComplexInterpolationTest, lerp)
+{
+    using C = std::complex<TypeParam>;
+
+    constexpr auto atol = DualComplexInterpolationTest<TypeParam>::absolute_tolerance();
+
+    const auto angle0 = DualComplexInterpolationTest<TypeParam>::PI / TypeParam(4);
+    const auto d0 = C(TypeParam(1), TypeParam(2));
+    const auto dc0 = dcn::translation(d0) * dcn::rotation(angle0);
+
+    const auto angle1 = DualComplexInterpolationTest<TypeParam>::PI / TypeParam(2);
+    const auto d1 = C(TypeParam(3), TypeParam(4));
+    const auto dc1 = dcn::translation(d1) * dcn::rotation(angle1);
+    // t == 0
+    {
+        const auto t = TypeParam(0);
+
+        auto dc = dc0;
+        auto res = lerp(dc0, dc1, t);
+
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+    }
+    // t == 1
+    {
+        const auto t = TypeParam(1);
+
+        auto dc = dc1;
+        auto res = lerp(dc0, dc1, t);
+
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+    }
+    // t == 0.5
+    {
+        const auto t = TypeParam(0.5);
+
+        auto dc = (TypeParam(1) - t) * dc0 + t * dc1;
+        auto res = lerp(dc0, dc1, t);
+
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+        EXPECT_NOT_ALMOST_EQUAL(TypeParam, TypeParam(1), norm(res), atol);
+    }
+}
+
+TYPED_TEST(DualComplexInterpolationTest, nlerp)
+{
+    using C = std::complex<TypeParam>;
+
+    constexpr auto atol = DualComplexInterpolationTest<TypeParam>::absolute_tolerance();
+
+    const auto angle0 = DualComplexInterpolationTest<TypeParam>::PI / TypeParam(4);
+    const auto d0 = C(TypeParam(1), TypeParam(2));
+    const auto dc0 = dcn::translation(d0) * dcn::rotation(angle0);
+
+    const auto angle1 = DualComplexInterpolationTest<TypeParam>::PI / TypeParam(2);
+    const auto d1 = C(TypeParam(3), TypeParam(4));
+    const auto dc1 = dcn::translation(d1) * dcn::rotation(angle1);
+    // t == 0
+    {
+        const auto t = TypeParam(0);
+
+        auto dc = dc0;
+        auto res = lerp(dc0, dc1, t);
+
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+    }
+    // t == 1
+    {
+        const auto t = TypeParam(1);
+
+        auto dc = dc1;
+        auto res = lerp(dc0, dc1, t);
+
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+    }
+    // t == 0.5
+    {
+        const auto t = TypeParam(0.5);
+
+        auto dc = (TypeParam(1) - t) * dc0 + t * dc1;
+        dc /= norm(dc);
+        auto res = nlerp(dc0, dc1, t);
+
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+        EXPECT_ALMOST_EQUAL(TypeParam, TypeParam(1), norm(res), atol);
+    }
+}
+
 TYPED_TEST(DualComplexInterpolationTest, slerp)
 {
     using C = std::complex<TypeParam>;

@@ -15,6 +15,21 @@ namespace dcn
 
 template<typename T>
 DualComplex<T>
+lerp(const DualComplex<T>& dc0, const DualComplex<T>& dc1, T t)
+{
+    return (static_cast<T>(1) - t) * dc0 + t * dc1;
+}
+
+template<typename T>
+DualComplex<T>
+nlerp(const DualComplex<T>& dc0, const DualComplex<T>& dc1, T t)
+{
+    auto res = lerp(dc0, dc1, t);
+    return res / norm(res);
+}
+
+template<typename T>
+DualComplex<T>
 slerp(const DualComplex<T>& dc0, const DualComplex<T>& dc1, T t)
 {
     return dc0 * pow(transformation_difference(dc0, dc1), t);
