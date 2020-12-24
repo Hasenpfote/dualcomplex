@@ -164,4 +164,38 @@ TYPED_TEST(DualComplexCommonTest, total_conjugate)
     }
 }
 
+TYPED_TEST(DualComplexCommonTest, normalize)
+{
+    using C = std::complex<TypeParam>;
+    using DC = dcn::DualComplex<TypeParam>;
+
+    constexpr auto atol = DualComplexCommonTest<TypeParam>::absolute_tolerance();
+
+    const auto a = C(TypeParam(1), TypeParam(2));
+    const auto b = C(TypeParam(3), TypeParam(4));
+    const auto dc = DC(a, b);
+
+    {
+        auto real = a / std::abs(a);
+        auto dual = b / std::abs(a);
+        auto res = normalize(dc);
+
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+        EXPECT_ALMOST_EQUAL(TypeParam, TypeParam(1), std::norm(res.real()), atol);
+    }
+    {
+        auto ndc = normalize(dc);
+        auto inv = DC(std::conj(ndc.real()), -ndc.dual());
+
+        auto inv_ndc = inv * ndc;
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, C(TypeParam(1), TypeParam(0)), inv_ndc.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, C(TypeParam(0), TypeParam(0)), inv_ndc.dual(), atol);
+
+        auto ndc_inv = ndc * inv;
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, C(TypeParam(1), TypeParam(0)), ndc_inv.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, C(TypeParam(0), TypeParam(0)), ndc_inv.dual(), atol);
+    }
+}
+
 }   // namespace

@@ -50,4 +50,14 @@ total_conjugate(const DualComplex<T>& dc)
     return DualComplex<T>(std::conj(dc.real()), -dc.dual());
 }
 
+/**
+ * Returns the normalized version of a dual complex number.
+ */
+template<typename T>
+DualComplex<T>
+normalize(const DualComplex<T>& dc)
+{
+    return dc / norm(dc);
+}
+
 }   // namespace dcn
