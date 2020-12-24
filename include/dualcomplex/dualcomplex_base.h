@@ -29,6 +29,13 @@ public:
     {}
 
     /**
+     * Constructs a dual complex number from four real numbers.
+     */
+    DualComplex(T a, T b, T c, T d)
+        : DualComplex(std::complex<T>(a, b), std::complex<T>(c, d))
+    {}
+
+    /**
      * Constructs a dual complex number from a vector.
      */
     explicit DualComplex(const std::complex<T>& v)

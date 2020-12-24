@@ -117,4 +117,63 @@ TYPED_TEST(DualComplexInterpolationTest, slerp_shortestpath)
     }
 }
 
+TYPED_TEST(DualComplexInterpolationTest, dlb)
+{
+    using C = std::complex<TypeParam>;
+    using DC = dcn::DualComplex<TypeParam>;
+
+    constexpr auto atol = DualComplexInterpolationTest<TypeParam>::absolute_tolerance();
+
+    std::vector<DC> transforms;
+    std::vector<TypeParam> weights;
+
+    const auto angle0 = DualComplexInterpolationTest<TypeParam>::PI / TypeParam(4);
+    const auto d0 = C(TypeParam(1), TypeParam(2));
+    transforms.push_back(dcn::translation(d0) * dcn::rotation(angle0));
+
+    const auto angle1 = DualComplexInterpolationTest<TypeParam>::PI / TypeParam(2);
+    const auto d1 = C(TypeParam(3), TypeParam(4));
+    transforms.push_back(dcn::translation(d1) * dcn::rotation(angle1));
+    // t == 0
+    {
+        const auto t = TypeParam(0);
+        weights.clear();
+        weights.push_back(TypeParam(1) - t);
+        weights.push_back(t);
+
+        auto dc = transforms[0];
+        auto res = dlb(transforms, weights);
+
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+    }
+    // t == 1
+    {
+        const auto t = TypeParam(1);
+        weights.clear();
+        weights.push_back(TypeParam(1) - t);
+        weights.push_back(t);
+
+        auto dc = transforms[1];
+        auto res = dlb(transforms, weights);
+
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+    }
+    // t == 0.5
+    {
+        const auto t = TypeParam(0.5);
+        weights.clear();
+        weights.push_back(TypeParam(1) - t);
+        weights.push_back(t);
+
+        auto dc = (TypeParam(1) - t) * transforms[0] + t * transforms[1];
+        dc /= norm(dc);
+        auto res = dlb(transforms, weights);
+
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+    }
+}
+
 }   // namespace
