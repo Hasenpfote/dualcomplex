@@ -17,22 +17,17 @@ Eigen::Matrix<T, 3, 3>
 convert_to_matrix(const DualComplex<T>& dc)
 {
     Eigen::Matrix<T, 3, 3> m;
-    //
-    const auto a = dc.real().real();
-    const auto b = dc.real().imag();
-    const auto c = dc.dual().real();
-    const auto d = dc.dual().imag();
 
-    const auto temp0 = a * a - b * b;
-    const auto temp1 = static_cast<T>(2) * a * b;
+    const auto r_squared = dc.real() * dc.real();
+    const auto twice_rd = static_cast<T>(2) * dc.real() * dc.dual();
 
-    m(0,0) = temp0;
-    m(0,1) = -temp1;
-    m(0,2) = static_cast<T>(2) * (a * c - b * d);
+    m(0,0) = r_squared.real();
+    m(0,1) =-r_squared.imag();
+    m(0,2) = twice_rd.real();
 
-    m(1,0) = temp1;
-    m(1,1) = temp0;
-    m(1,2) = static_cast<T>(2) * (a * d + b * c);
+    m(1,0) = r_squared.imag();
+    m(1,1) = r_squared.real();
+    m(1,2) = twice_rd.imag();
 
     m(2,0) = static_cast<T>(0);
     m(2,1) = static_cast<T>(0);
