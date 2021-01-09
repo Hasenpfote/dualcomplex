@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Hasenpfote/dualcomplex.svg?branch=master)](https://travis-ci.org/Hasenpfote/dualcomplex)
+[![Build Status](https://travis-ci.com/Hasenpfote/dualcomplex.svg?branch=master)](https://travis-ci.com/Hasenpfote/dualcomplex)
 
 # dualcomplex
 
@@ -10,7 +10,7 @@
 
 - Header-only.
 
-  
+
 
 ## Compatibility
 
