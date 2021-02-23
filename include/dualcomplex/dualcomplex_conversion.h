@@ -4,7 +4,7 @@
  */
 #pragma once
 
-#include <Eigen/Geometry>
+#include <Eigen/Core>
 
 namespace dcn
 {
