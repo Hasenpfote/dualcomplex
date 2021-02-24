@@ -57,8 +57,8 @@ TYPED_TEST(DualComplexInterpolationTest, lerp)
         auto dc = dc0;
         auto res = lerp(dc0, dc1, t);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
     }
     // t == 1
     {
@@ -67,8 +67,8 @@ TYPED_TEST(DualComplexInterpolationTest, lerp)
         auto dc = dc1;
         auto res = lerp(dc0, dc1, t);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
     }
     // t == 0.5
     {
@@ -77,9 +77,9 @@ TYPED_TEST(DualComplexInterpolationTest, lerp)
         auto dc = (TypeParam(1) - t) * dc0 + t * dc1;
         auto res = lerp(dc0, dc1, t);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
-        EXPECT_NOT_ALMOST_EQUAL(TypeParam, TypeParam(1), norm(res), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
+        EXPECT_NOT_ALMOST_EQUAL(TypeParam(1), norm(res), atol);
     }
 }
 
@@ -103,8 +103,8 @@ TYPED_TEST(DualComplexInterpolationTest, nlerp)
         auto dc = dc0;
         auto res = lerp(dc0, dc1, t);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
     }
     // t == 1
     {
@@ -113,8 +113,8 @@ TYPED_TEST(DualComplexInterpolationTest, nlerp)
         auto dc = dc1;
         auto res = lerp(dc0, dc1, t);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
     }
     // t == 0.5
     {
@@ -124,9 +124,9 @@ TYPED_TEST(DualComplexInterpolationTest, nlerp)
         dc /= norm(dc);
         auto res = nlerp(dc0, dc1, t);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
-        EXPECT_ALMOST_EQUAL(TypeParam, TypeParam(1), norm(res), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
+        EXPECT_ALMOST_EQUAL(TypeParam(1), norm(res), atol);
     }
 }
 
@@ -148,16 +148,16 @@ TYPED_TEST(DualComplexInterpolationTest, slerp)
         auto dc = p;
         auto res = slerp(p, q, TypeParam(0));
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
     }
     // t = 1
     {
         auto dc = q;
         auto res = slerp(p, q, TypeParam(1));
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
     }
     // t
     {
@@ -165,8 +165,8 @@ TYPED_TEST(DualComplexInterpolationTest, slerp)
         auto dc = p * exp(t * log(transformation_difference(p, q)));
         auto res = slerp(p, q, t);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
     }
 }
 
@@ -188,16 +188,16 @@ TYPED_TEST(DualComplexInterpolationTest, slerp_shortestpath)
         auto dc = p;
         auto res = slerp_shortestpath(p, q, TypeParam(0));
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
     }
     // t = 1
     {
         auto dc = -q;
         auto res = slerp_shortestpath(p, q, TypeParam(1));
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
     }
     // t
     {
@@ -205,8 +205,8 @@ TYPED_TEST(DualComplexInterpolationTest, slerp_shortestpath)
         auto dc = p * exp(t * log(transformation_difference(p, -q)));
         auto res = slerp_shortestpath(p, q, t);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
     }
 }
 
@@ -237,8 +237,8 @@ TYPED_TEST(DualComplexInterpolationTest, dlb)
         auto dc = transforms[0];
         auto res = dlb(transforms, weights);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
     }
     // t == 1
     {
@@ -250,8 +250,8 @@ TYPED_TEST(DualComplexInterpolationTest, dlb)
         auto dc = transforms[1];
         auto res = dlb(transforms, weights);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
     }
     // t == 0.5
     {
@@ -264,8 +264,8 @@ TYPED_TEST(DualComplexInterpolationTest, dlb)
         dc /= norm(dc);
         auto res = dlb(transforms, weights);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
     }
 }
 

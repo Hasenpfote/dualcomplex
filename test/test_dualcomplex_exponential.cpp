@@ -46,8 +46,8 @@ TYPED_TEST(DualComplexExponentialTest, exp)
     auto dual = temp * b;
     auto res = exp(DC(a, b));
 
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
 }
 
 TYPED_TEST(DualComplexExponentialTest, log)
@@ -64,8 +64,8 @@ TYPED_TEST(DualComplexExponentialTest, log)
     auto dual = b / a;
     auto res = log(DC(a, b));
 
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
 }
 
 TYPED_TEST(DualComplexExponentialTest, exp_log)
@@ -81,15 +81,15 @@ TYPED_TEST(DualComplexExponentialTest, exp_log)
     {
         auto res = log(exp(DC(a, b)));
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, a, res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, b, res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(a, res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(b, res.dual(), atol);
     }
     // exp(log(dc)) == dc
     {
         auto res = exp(log(DC(a, b)));
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, a, res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, b, res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(a, res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(b, res.dual(), atol);
     }
 }
 
@@ -108,8 +108,8 @@ TYPED_TEST(DualComplexExponentialTest, pow)
     auto dc = exp(exponent * log(base));
     auto res = pow(base, exponent);
 
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
 }
 
 }   // namespace

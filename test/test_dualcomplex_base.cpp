@@ -44,8 +44,8 @@ TYPED_TEST(DualComplexBaseTest, Accessor)
     res.real() = real;
     res.dual() = dual;
 
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
 }
 
 TYPED_TEST(DualComplexBaseTest, AdditionAssignment)
@@ -66,8 +66,8 @@ TYPED_TEST(DualComplexBaseTest, AdditionAssignment)
     DC rhs(c, d);
     lhs += rhs;
 
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, lhs.real(), atol);
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, lhs.dual(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(real, lhs.real(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(dual, lhs.dual(), atol);
 }
 
 TYPED_TEST(DualComplexBaseTest, SubtractionAssignment)
@@ -88,8 +88,8 @@ TYPED_TEST(DualComplexBaseTest, SubtractionAssignment)
     DC rhs(c, d);
     lhs -= rhs;
 
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, lhs.real(), atol);
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, lhs.dual(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(real, lhs.real(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(dual, lhs.dual(), atol);
 }
 
 TYPED_TEST(DualComplexBaseTest, MultiplicationAssignment)
@@ -114,8 +114,8 @@ TYPED_TEST(DualComplexBaseTest, MultiplicationAssignment)
         DC rhs(c, d);
         lhs *= rhs;
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, lhs.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, lhs.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(real, lhs.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dual, lhs.dual(), atol);
     }
     // dc * scalar
     {
@@ -126,8 +126,8 @@ TYPED_TEST(DualComplexBaseTest, MultiplicationAssignment)
         DC lhs(a, b);
         lhs *= s;
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, lhs.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, lhs.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(real, lhs.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dual, lhs.dual(), atol);
     }
 }
 
@@ -154,8 +154,8 @@ TYPED_TEST(DualComplexBaseTest, DivisionAssignment)
         DC rhs(c, d);
         lhs /= rhs;
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, lhs.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, lhs.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(real, lhs.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dual, lhs.dual(), atol);
     }
     // dc * scalar
     {
@@ -166,8 +166,8 @@ TYPED_TEST(DualComplexBaseTest, DivisionAssignment)
         DC lhs(a, b);
         lhs /= s;
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, lhs.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, lhs.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(real, lhs.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dual, lhs.dual(), atol);
     }
 }
 
@@ -185,8 +185,8 @@ TYPED_TEST(DualComplexBaseTest, UnaryPlus)
 
     auto res = +DC(a, b);
 
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
 }
 
 TYPED_TEST(DualComplexBaseTest, UnaryMinus)
@@ -203,8 +203,8 @@ TYPED_TEST(DualComplexBaseTest, UnaryMinus)
 
     auto res = -DC(a, b);
 
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
 }
 
 TYPED_TEST(DualComplexBaseTest, Addition)
@@ -223,8 +223,8 @@ TYPED_TEST(DualComplexBaseTest, Addition)
 
     auto res = DC(a, b) + DC(c, d);
 
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
 }
 
 TYPED_TEST(DualComplexBaseTest, Subtraction)
@@ -243,8 +243,8 @@ TYPED_TEST(DualComplexBaseTest, Subtraction)
 
     auto res = DC(a, b) - DC(c, d);
 
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
 }
 
 TYPED_TEST(DualComplexBaseTest, Multiplication)
@@ -267,8 +267,8 @@ TYPED_TEST(DualComplexBaseTest, Multiplication)
 
         auto res = DC(a, b) * DC(c, d);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
 
     }
     // dc * scalar
@@ -279,8 +279,8 @@ TYPED_TEST(DualComplexBaseTest, Multiplication)
 
         auto res = DC(a, b) * s;
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
     }
     // scalar * dc
     {
@@ -290,8 +290,8 @@ TYPED_TEST(DualComplexBaseTest, Multiplication)
 
         auto res = s * DC(a, b);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
     }
 }
 
@@ -316,8 +316,8 @@ TYPED_TEST(DualComplexBaseTest, Division)
 
         auto res = DC(a, b) / DC(c, d);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
     }
     // dc * scalar
     {
@@ -327,8 +327,8 @@ TYPED_TEST(DualComplexBaseTest, Division)
 
         auto res = DC(a, b) / s;
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
     }
 }
 

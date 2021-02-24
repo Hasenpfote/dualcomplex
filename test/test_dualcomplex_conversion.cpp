@@ -56,7 +56,7 @@ TYPED_TEST(DualComplexConversionTest, convert_to_matrix)
     auto temp = m * vec;
     auto mv = C(temp.x(), temp.y());
 
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, pv, mv, atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(pv, mv, atol);
 }
 
 }   // namespace

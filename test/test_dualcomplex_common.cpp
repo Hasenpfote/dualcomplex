@@ -44,7 +44,7 @@ TYPED_TEST(DualComplexCommonTest, squared_norm)
     const auto sn = std::norm(a);
     auto res = squared_norm(DC(a, b));
 
-    EXPECT_ALMOST_EQUAL(TypeParam, sn, res, atol);
+    EXPECT_ALMOST_EQUAL(sn, res, atol);
 }
 
 TYPED_TEST(DualComplexCommonTest, norm)
@@ -60,7 +60,7 @@ TYPED_TEST(DualComplexCommonTest, norm)
     const auto sn = std::sqrt(std::norm(a));
     auto res = norm(DC(a, b));
 
-    EXPECT_ALMOST_EQUAL(TypeParam, sn, res, atol);
+    EXPECT_ALMOST_EQUAL(sn, res, atol);
 }
 
 TYPED_TEST(DualComplexCommonTest, inverse)
@@ -81,20 +81,20 @@ TYPED_TEST(DualComplexCommonTest, inverse)
         auto dual = -b / sn;
         auto res = inv;
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
     }
     // inv * dc
     {
         auto res = inv * dc;
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, C(TypeParam(1), TypeParam(0)), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, C(TypeParam(0), TypeParam(0)), res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(C(TypeParam(1), TypeParam(0)), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(C(TypeParam(0), TypeParam(0)), res.dual(), atol);
     }
     // dc * inv
     {
         auto res = dc * inv;
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, C(TypeParam(1), TypeParam(0)), res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, C(TypeParam(0), TypeParam(0)), res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(C(TypeParam(1), TypeParam(0)), res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(C(TypeParam(0), TypeParam(0)), res.dual(), atol);
     }
 }
 
@@ -115,8 +115,8 @@ TYPED_TEST(DualComplexCommonTest, complex_conjugate)
         auto dual = b;
         auto res = conj;
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
     }
 }
 
@@ -137,8 +137,8 @@ TYPED_TEST(DualComplexCommonTest, dual_conjugate)
         auto dual = -b;
         auto res = conj;
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
     }
 }
 
@@ -159,8 +159,8 @@ TYPED_TEST(DualComplexCommonTest, total_conjugate)
         auto dual = -b;
         auto res = conj;
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
     }
 }
 
@@ -180,21 +180,21 @@ TYPED_TEST(DualComplexCommonTest, normalize)
         auto dual = b / std::abs(a);
         auto res = normalize(dc);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
-        EXPECT_ALMOST_EQUAL(TypeParam, TypeParam(1), std::norm(res.real()), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
+        EXPECT_ALMOST_EQUAL(TypeParam(1), std::norm(res.real()), atol);
     }
     {
         auto ndc = normalize(dc);
         auto inv = DC(std::conj(ndc.real()), -ndc.dual());
 
         auto inv_ndc = inv * ndc;
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, C(TypeParam(1), TypeParam(0)), inv_ndc.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, C(TypeParam(0), TypeParam(0)), inv_ndc.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(C(TypeParam(1), TypeParam(0)), inv_ndc.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(C(TypeParam(0), TypeParam(0)), inv_ndc.dual(), atol);
 
         auto ndc_inv = ndc * inv;
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, C(TypeParam(1), TypeParam(0)), ndc_inv.real(), atol);
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, C(TypeParam(0), TypeParam(0)), ndc_inv.dual(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(C(TypeParam(1), TypeParam(0)), ndc_inv.real(), atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(C(TypeParam(0), TypeParam(0)), ndc_inv.dual(), atol);
     }
 }
 

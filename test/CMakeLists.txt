@@ -46,7 +46,6 @@ target_sources(
     ${TEST_NAME}
     PRIVATE
     gtest_helper.h
-    gtest_helper.cpp
     test_dualcomplex_base.cpp
     test_dualcomplex_common.cpp
     test_dualcomplex_exponential.cpp

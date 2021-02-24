@@ -49,8 +49,8 @@ TYPED_TEST(DualComplexTransformTest, rotation)
     auto dual = C(TypeParam(0), TypeParam(0));
     auto res = dcn::rotation(angle);
 
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
 }
 
 TYPED_TEST(DualComplexTransformTest, translation)
@@ -65,8 +65,8 @@ TYPED_TEST(DualComplexTransformTest, translation)
     auto dual = d / TypeParam(2);
     auto res = dcn::translation(d);
 
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, real, res.real(), atol);
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dual, res.dual(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(real, res.real(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(dual, res.dual(), atol);
 }
 
 TYPED_TEST(DualComplexTransformTest, transform)
@@ -87,7 +87,7 @@ TYPED_TEST(DualComplexTransformTest, transform)
         auto dc = p * DC(v) * DC(std::conj(p.real()), p.dual());
         auto res = dcn::transform(p, v);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res, atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res, atol);
     }
     // translation -> rotation
     {
@@ -95,7 +95,7 @@ TYPED_TEST(DualComplexTransformTest, transform)
         auto dc = p * DC(v) * DC(std::conj(p.real()), p.dual());
         auto res = dcn::transform(p, v);
 
-        EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res, atol);
+        EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res, atol);
     }
 }
 
@@ -117,8 +117,8 @@ TYPED_TEST(DualComplexTransformTest, transformation_difference)
     auto dc = DC(std::conj(p.real()), -p.dual()) * q;
     auto res = transformation_difference(p, q);
 
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.real(), res.real(), atol);
-    EXPECT_COMPLEX_ALMOST_EQUAL(TypeParam, dc.dual(), res.dual(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(dc.real(), res.real(), atol);
+    EXPECT_COMPLEX_ALMOST_EQUAL(dc.dual(), res.dual(), atol);
 }
 
 }   // namespace
